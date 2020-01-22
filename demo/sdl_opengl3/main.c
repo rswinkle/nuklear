@@ -42,13 +42,15 @@
 /*#define INCLUDE_ALL */
 /*#define INCLUDE_STYLE */
 /*#define INCLUDE_CALCULATOR */
-/*#define INCLUDE_OVERVIEW */
+#define INCLUDE_OVERVIEW
+#define INCLUDE_CONFIGURATOR
 /*#define INCLUDE_NODE_EDITOR */
 
 #ifdef INCLUDE_ALL
   #define INCLUDE_STYLE
   #define INCLUDE_CALCULATOR
   #define INCLUDE_OVERVIEW
+  #define INCLUDE_CONFIGURATOR
   #define INCLUDE_NODE_EDITOR
 #endif
 
@@ -60,6 +62,9 @@
 #endif
 #ifdef INCLUDE_OVERVIEW
   #include "../overview.c"
+#endif
+#ifdef INCLUDE_OVERVIEW
+  #include "../style_configurator.c"
 #endif
 #ifdef INCLUDE_NODE_EDITOR
   #include "../node_editor.c"
@@ -178,6 +183,9 @@ int main(int argc, char *argv[])
         #endif
         #ifdef INCLUDE_OVERVIEW
           overview(ctx);
+        #endif
+        #ifdef INCLUDE_OVERVIEW
+          style_configurator(ctx);
         #endif
         #ifdef INCLUDE_NODE_EDITOR
           node_editor(ctx);
