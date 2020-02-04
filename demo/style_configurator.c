@@ -1,3 +1,224 @@
+
+static int
+style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct nk_style_button** duplicate_styles, int n_dups)
+{
+	struct nk_style_button button = *out_style;
+	//button = &style->button;
+	//nk_zero_struct(*button);
+	//button->normal          = nk_style_item_color(table[NK_COLOR_BUTTON]);
+	//button->hover           = nk_style_item_color(table[NK_COLOR_BUTTON_HOVER]);
+	//button->active          = nk_style_item_color(table[NK_COLOR_BUTTON_ACTIVE]);
+	//button->border_color    = table[NK_COLOR_BORDER];
+	//button->text_background = table[NK_COLOR_BUTTON];
+	//button->text_normal     = table[NK_COLOR_TEXT];
+	//button->text_hover      = table[NK_COLOR_TEXT];
+	//button->text_active     = table[NK_COLOR_TEXT];
+	//button->padding         = nk_vec2(2.0f,2.0f);
+	//button->image_padding   = nk_vec2(0.0f,0.0f);
+	//button->touch_padding   = nk_vec2(0.0f, 0.0f);
+	//button->userdata        = nk_handle_ptr(0);
+	//button->text_alignment  = NK_TEXT_CENTERED;
+	//button->border          = 1.0f;
+	//button->rounding        = 4.0f;
+	//button->draw_begin      = 0;
+	//button->draw_end        = 0;
+
+
+	char buffer[64];
+
+	// Assumes all the style items are colors not images
+	nk_layout_row_dynamic(ctx, 30, 2);
+	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.active.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.border_color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Background:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.text_background, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_background), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.text_background = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_normal), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.text_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_hover), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.text_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, button.text_active, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_active), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		button.text_active = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", button.padding.x, button.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &button.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &button.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Image Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", button.image_padding.x, button.image_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &button.image_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &button.image_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Touch Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", button.touch_padding.x, button.touch_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &button.touch_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &button.touch_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+
+	/*
+enum nk_text_align {
+NK_TEXT_ALIGN_LEFT        = 0x01,
+NK_TEXT_ALIGN_CENTERED    = 0x02,
+NK_TEXT_ALIGN_RIGHT       = 0x04,
+NK_TEXT_ALIGN_TOP         = 0x08,
+NK_TEXT_ALIGN_MIDDLE      = 0x10,
+NK_TEXT_ALIGN_BOTTOM      = 0x20
+};
+enum nk_text_alignment {
+NK_TEXT_LEFT        = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_LEFT,
+NK_TEXT_CENTERED    = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_CENTERED,
+NK_TEXT_RIGHT       = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_RIGHT
+};
+*/
+	// TODO support combining with TOP/MIDDLE/BOTTOM .. separate combo?
+	const char* alignments[] = { "LEFT", "CENTERED", "RIGHT" };
+	int aligns[3] = { NK_TEXT_LEFT, NK_TEXT_CENTERED, NK_TEXT_RIGHT };
+	int cur_align;
+	if (button.text_alignment == NK_TEXT_LEFT) {
+		cur_align = 0;
+	} else if (button.text_alignment == NK_TEXT_CENTERED) {
+		cur_align = 1;
+	} else {
+		cur_align = 2;
+	}
+	nk_label(ctx, "Text Alignment:", NK_TEXT_LEFT);
+	cur_align = nk_combo(ctx, alignments, NK_LEN(alignments), cur_align, 25, nk_vec2(200,200));
+	button.text_alignment = aligns[cur_align];
+
+	nk_property_float(ctx, "#Border:", -100.0f, &button.border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Rounding:", -100.0f, &button.rounding, 100.0f, 1,0.5f);
+
+	//
+	// optional user callback stuff
+	//button->userdata        = nk_handle_ptr(0);
+	//button->draw_begin      = 0;
+	//button->draw_end        = 0;
+
+
+	*out_style = button;
+	if (duplicate_styles) {
+		for (int i=0; i<n_dups; ++i) {
+			*duplicate_styles[i] = button;
+		}
+	}
+
+}
+
+
+
 static int
 style_configurator(struct nk_context *ctx)
 {
@@ -27,7 +248,6 @@ style_configurator(struct nk_context *ctx)
 	struct nk_style *style = &ctx->style;
 
 	struct nk_style_text text = style->text;
-	struct nk_style_button button = style->button;
 	struct nk_style_toggle *toggle;
 	struct nk_style_selectable *select;
 	struct nk_style_slider *slider;
@@ -78,263 +298,49 @@ style_configurator(struct nk_context *ctx)
 				nk_property_float(ctx, "#Y:", -100.0f, &text.padding.y, 100.0f, 1,0.5f);
 				nk_combo_end(ctx);
 			}
+			style->text = text;
 
 			nk_tree_pop(ctx);
 		}
 
 		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Button", NK_MINIMIZED)) {
-			//button = &style->button;
-			//nk_zero_struct(*button);
-			//button->normal          = nk_style_item_color(table[NK_COLOR_BUTTON]);
-			//button->hover           = nk_style_item_color(table[NK_COLOR_BUTTON_HOVER]);
-			//button->active          = nk_style_item_color(table[NK_COLOR_BUTTON_ACTIVE]);
-			//button->border_color    = table[NK_COLOR_BORDER];
-			//button->text_background = table[NK_COLOR_BUTTON];
-			//button->text_normal     = table[NK_COLOR_TEXT];
-			//button->text_hover      = table[NK_COLOR_TEXT];
-			//button->text_active     = table[NK_COLOR_TEXT];
-			//button->padding         = nk_vec2(2.0f,2.0f);
-			//button->image_padding   = nk_vec2(0.0f,0.0f);
-			//button->touch_padding   = nk_vec2(0.0f, 0.0f);
-			//button->userdata        = nk_handle_ptr(0);
-			//button->text_alignment  = NK_TEXT_CENTERED;
-			//button->border          = 1.0f;
-			//button->rounding        = 4.0f;
-			//button->draw_begin      = 0;
-			//button->draw_end        = 0;
+			style_button(ctx, &style->button, NULL, 0);
+			nk_tree_pop(ctx);
+		}
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Contextual Button", NK_MINIMIZED)) {
+			style_button(ctx, &style->contextual_button, NULL, 0);
+			nk_tree_pop(ctx);
+		}
 
-			char buffer[64];
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Menu Button", NK_MINIMIZED)) {
+			style_button(ctx, &style->menu_button, NULL, 0);
+			nk_tree_pop(ctx);
+		}
 
-			// Assumes all the style items are colors not images
-			nk_layout_row_dynamic(ctx, 30, 2);
-			nk_label(ctx, "Normal:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.normal.data.color), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Slider Buttons", NK_MINIMIZED)) {
+			struct nk_style_button* dups[1] = { &style->slider.dec_button };
+			style_button(ctx, &style->slider.inc_button, dups, 1);
+			nk_tree_pop(ctx);
+		}
 
-				button.normal.data.color = nk_rgb_cf(colorf);
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Scrollbar Buttons", NK_MINIMIZED)) {
+			struct nk_style_button* dups[3] = { &style->scrollh.dec_button,
+			                                          &style->scrollv.inc_button,
+			                                          &style->scrollv.dec_button };
+			style_button(ctx, &style->scrollh.inc_button, dups, 3);
+			nk_tree_pop(ctx);
+		}
 
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Hover:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.hover.data.color), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.hover.data.color = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Active:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.active.data.color), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.active.data.color = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Border:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.border_color), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.border_color = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Text Background:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.text_background, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_background), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.text_background = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_normal), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.text_normal = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_hover), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.text_hover = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Text Active:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, button.text_active, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_active), NK_RGBA);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				button.text_active = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Padding:", NK_TEXT_LEFT);
-			sprintf(buffer, "%.2f, %.2f", button.padding.x, button.padding.y);
-			if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
-				nk_layout_row_dynamic(ctx, 25, 1);
-				nk_property_float(ctx, "#X:", -100.0f, &button.padding.x, 100.0f, 1,0.5f);
-				nk_property_float(ctx, "#Y:", -100.0f, &button.padding.y, 100.0f, 1,0.5f);
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Image Padding:", NK_TEXT_LEFT);
-			sprintf(buffer, "%.2f, %.2f", button.image_padding.x, button.image_padding.y);
-			if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
-				nk_layout_row_dynamic(ctx, 25, 1);
-				nk_property_float(ctx, "#X:", -100.0f, &button.image_padding.x, 100.0f, 1,0.5f);
-				nk_property_float(ctx, "#Y:", -100.0f, &button.image_padding.y, 100.0f, 1,0.5f);
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Touch Padding:", NK_TEXT_LEFT);
-			sprintf(buffer, "%.2f, %.2f", button.touch_padding.x, button.touch_padding.y);
-			if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
-				nk_layout_row_dynamic(ctx, 25, 1);
-				nk_property_float(ctx, "#X:", -100.0f, &button.touch_padding.x, 100.0f, 1,0.5f);
-				nk_property_float(ctx, "#Y:", -100.0f, &button.touch_padding.y, 100.0f, 1,0.5f);
-				nk_combo_end(ctx);
-			}
-
-
-			/*
-enum nk_text_align {
-    NK_TEXT_ALIGN_LEFT        = 0x01,
-    NK_TEXT_ALIGN_CENTERED    = 0x02,
-    NK_TEXT_ALIGN_RIGHT       = 0x04,
-    NK_TEXT_ALIGN_TOP         = 0x08,
-    NK_TEXT_ALIGN_MIDDLE      = 0x10,
-    NK_TEXT_ALIGN_BOTTOM      = 0x20
-};
-enum nk_text_alignment {
-    NK_TEXT_LEFT        = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_LEFT,
-    NK_TEXT_CENTERED    = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_CENTERED,
-    NK_TEXT_RIGHT       = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_RIGHT
-};
-*/
-			// TODO support combining with TOP/MIDDLE/BOTTOM .. separate combo?
-			const char* alignments[] = { "LEFT", "CENTERED", "RIGHT" };
-			int aligns[3] = { NK_TEXT_LEFT, NK_TEXT_CENTERED, NK_TEXT_RIGHT };
-			int cur_align;
-			if (button.text_alignment == NK_TEXT_LEFT) {
-				cur_align = 0;
-			} else if (button.text_alignment == NK_TEXT_CENTERED) {
-				cur_align = 1;
-			} else {
-				cur_align = 2;
-			}
-			nk_label(ctx, "Text Alignment:", NK_TEXT_LEFT);
-			cur_align = nk_combo(ctx, alignments, NK_LEN(alignments), cur_align, 25, nk_vec2(200,200));
-			button.text_alignment = aligns[cur_align];
-
-			nk_property_float(ctx, "#Border:", -100.0f, &button.border, 100.0f, 1,0.5f);
-			nk_property_float(ctx, "#Rounding:", -100.0f, &button.rounding, 100.0f, 1,0.5f);
-
-			//
-			// optional user callback stuff
-			//button->userdata        = nk_handle_ptr(0);
-			//button->draw_begin      = 0;
-			//button->draw_end        = 0;
-
-
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Property Buttons", NK_MINIMIZED)) {
+			struct nk_style_button* dups[1] = { &style->property.dec_button };
+			style_button(ctx, &style->property.inc_button, dups, 1);
 			nk_tree_pop(ctx);
 		}
 	}
 
-	style->text = text;
-	style->button = button;
 
 //
-//		/* contextual button */
-//		button = &style->contextual_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_BUTTON_HOVER]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_BUTTON_ACTIVE]);
-//		button->border_color    = table[NK_COLOR_WINDOW];
-//		button->text_background = table[NK_COLOR_WINDOW];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(2.0f,2.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//
-//		/* menu button */
-//		button = &style->menu_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->border_color    = table[NK_COLOR_WINDOW];
-//		button->text_background = table[NK_COLOR_WINDOW];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(2.0f,2.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 1.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
 //
 //		/* checkbox toggle */
 //		toggle = &style->checkbox;
@@ -422,26 +428,6 @@ enum nk_text_alignment {
 //		slider->draw_begin      = 0;
 //		slider->draw_end        = 0;
 //
-//		/* slider buttons */
-//		button = &style->slider.inc_button;
-//		button->normal          = nk_style_item_color(nk_rgb(40,40,40));
-//		button->hover           = nk_style_item_color(nk_rgb(42,42,42));
-//		button->active          = nk_style_item_color(nk_rgb(44,44,44));
-//		button->border_color    = nk_rgb(65,65,65);
-//		button->text_background = nk_rgb(40,40,40);
-//		button->text_normal     = nk_rgb(175,175,175);
-//		button->text_hover      = nk_rgb(175,175,175);
-//		button->text_active     = nk_rgb(175,175,175);
-//		button->padding         = nk_vec2(8.0f,8.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 1.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//		style->slider.dec_button = style->slider.inc_button;
-//
 //		/* progressbar */
 //		prog = &style->progress;
 //		nk_zero_struct(*prog);
@@ -485,28 +471,6 @@ enum nk_text_alignment {
 //		scroll->draw_begin      = 0;
 //		scroll->draw_end        = 0;
 //		style->scrollv = style->scrollh;
-//
-//		/* scrollbars buttons */
-//		button = &style->scrollh.inc_button;
-//		button->normal          = nk_style_item_color(nk_rgb(40,40,40));
-//		button->hover           = nk_style_item_color(nk_rgb(42,42,42));
-//		button->active          = nk_style_item_color(nk_rgb(44,44,44));
-//		button->border_color    = nk_rgb(65,65,65);
-//		button->text_background = nk_rgb(40,40,40);
-//		button->text_normal     = nk_rgb(175,175,175);
-//		button->text_hover      = nk_rgb(175,175,175);
-//		button->text_active     = nk_rgb(175,175,175);
-//		button->padding         = nk_vec2(4.0f,4.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 1.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//		style->scrollh.dec_button = style->scrollh.inc_button;
-//		style->scrollv.inc_button = style->scrollh.inc_button;
-//		style->scrollv.dec_button = style->scrollh.inc_button;
 //
 //		/* edit */
 //		edit = &style->edit;
@@ -552,27 +516,6 @@ enum nk_text_alignment {
 //		property->rounding      = 10;
 //		property->draw_begin    = 0;
 //		property->draw_end      = 0;
-//
-//		/* property buttons */
-//		button = &style->property.dec_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_PROPERTY]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_PROPERTY]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_PROPERTY]);
-//		button->border_color    = nk_rgba(0,0,0,0);
-//		button->text_background = table[NK_COLOR_PROPERTY];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(0.0f,0.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//		style->property.inc_button = style->property.dec_button;
 //
 //		/* property edit */
 //		edit = &style->property.edit;
