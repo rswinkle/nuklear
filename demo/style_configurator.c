@@ -268,7 +268,7 @@ style_configurator(struct nk_context *ctx)
 	if (nk_begin(ctx, "Configurator", nk_rect(10, 10, 400, 600), window_flags))
 	{
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Text", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Text", NK_MINIMIZED)) {
 			//text = &style->text;
 			//text->color = table[NK_COLOR_TEXT];
 			//text->padding = nk_vec2(0,0);
@@ -303,28 +303,28 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Button", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Button", NK_MINIMIZED)) {
 			style_button(ctx, &style->button, NULL, 0);
 			nk_tree_pop(ctx);
 		}
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Contextual Button", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Contextual Button", NK_MINIMIZED)) {
 			style_button(ctx, &style->contextual_button, NULL, 0);
 			nk_tree_pop(ctx);
 		}
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Menu Button", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Menu Button", NK_MINIMIZED)) {
 			style_button(ctx, &style->menu_button, NULL, 0);
 			nk_tree_pop(ctx);
 		}
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Slider Buttons", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Slider Buttons", NK_MINIMIZED)) {
 			struct nk_style_button* dups[1] = { &style->slider.dec_button };
 			style_button(ctx, &style->slider.inc_button, dups, 1);
 			nk_tree_pop(ctx);
 		}
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Scrollbar Buttons", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Scrollbar Buttons", NK_MINIMIZED)) {
 			struct nk_style_button* dups[3] = { &style->scrollh.dec_button,
 			                                          &style->scrollv.inc_button,
 			                                          &style->scrollv.dec_button };
@@ -332,9 +332,35 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Style Property Buttons", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Property Buttons", NK_MINIMIZED)) {
 			struct nk_style_button* dups[1] = { &style->property.dec_button };
 			style_button(ctx, &style->property.inc_button, dups, 1);
+			nk_tree_pop(ctx);
+		}
+
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Combo Buttons", NK_MINIMIZED)) {
+			style_button(ctx, &style->combo.button, NULL, 0);
+			nk_tree_pop(ctx);
+		}
+
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Tab Min/Max Buttons", NK_MINIMIZED)) {
+			struct nk_style_button* dups[1] = { &style->tab.tab_maximize_button };
+			style_button(ctx, &style->tab.tab_minimize_button, dups, 1);
+			nk_tree_pop(ctx);
+		}
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Nobe Min/Max Buttons", NK_MINIMIZED)) {
+			struct nk_style_button* dups[1] = { &style->tab.node_maximize_button };
+			style_button(ctx, &style->tab.node_minimize_button, dups, 1);
+			nk_tree_pop(ctx);
+		}
+
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Window Header Close Buttons", NK_MINIMIZED)) {
+			style_button(ctx, &style->window.header.close_button, NULL, 0);
+			nk_tree_pop(ctx);
+		}
+
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Window Header Minimize Buttons", NK_MINIMIZED)) {
+			style_button(ctx, &style->window.header.minimize_button, NULL, 0);
 			nk_tree_pop(ctx);
 		}
 	}
@@ -569,26 +595,6 @@ style_configurator(struct nk_context *ctx)
 //		combo->border           = 1;
 //		combo->rounding         = 0;
 //
-//		/* combo button */
-//		button = &style->combo.button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_COMBO]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_COMBO]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_COMBO]);
-//		button->border_color    = nk_rgba(0,0,0,0);
-//		button->text_background = table[NK_COLOR_COMBO];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(2.0f,2.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//
 //		/* tab */
 //		tab = &style->tab;
 //		tab->background         = nk_style_item_color(table[NK_COLOR_TAB_HEADER]);
@@ -601,48 +607,6 @@ style_configurator(struct nk_context *ctx)
 //		tab->indent             = 10.0f;
 //		tab->border             = 1;
 //		tab->rounding           = 0;
-//
-//		/* tab button */
-//		button = &style->tab.tab_minimize_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_TAB_HEADER]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_TAB_HEADER]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_TAB_HEADER]);
-//		button->border_color    = nk_rgba(0,0,0,0);
-//		button->text_background = table[NK_COLOR_TAB_HEADER];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(2.0f,2.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//		style->tab.tab_maximize_button =*button;
-//
-//		/* node button */
-//		button = &style->tab.node_minimize_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		button->border_color    = nk_rgba(0,0,0,0);
-//		button->text_background = table[NK_COLOR_TAB_HEADER];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(2.0f,2.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//		style->tab.node_maximize_button =*button;
 //
 //		/* window header */
 //		win = &style->window;
@@ -659,46 +623,6 @@ style_configurator(struct nk_context *ctx)
 //		win->header.label_padding = nk_vec2(4,4);
 //		win->header.padding = nk_vec2(4,4);
 //		win->header.spacing = nk_vec2(0,0);
-//
-//		/* window header close button */
-//		button = &style->window.header.close_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_HEADER]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_HEADER]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_HEADER]);
-//		button->border_color    = nk_rgba(0,0,0,0);
-//		button->text_background = table[NK_COLOR_HEADER];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(0.0f,0.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
-//
-//		/* window header minimize button */
-//		button = &style->window.header.minimize_button;
-//		nk_zero_struct(*button);
-//		button->normal          = nk_style_item_color(table[NK_COLOR_HEADER]);
-//		button->hover           = nk_style_item_color(table[NK_COLOR_HEADER]);
-//		button->active          = nk_style_item_color(table[NK_COLOR_HEADER]);
-//		button->border_color    = nk_rgba(0,0,0,0);
-//		button->text_background = table[NK_COLOR_HEADER];
-//		button->text_normal     = table[NK_COLOR_TEXT];
-//		button->text_hover      = table[NK_COLOR_TEXT];
-//		button->text_active     = table[NK_COLOR_TEXT];
-//		button->padding         = nk_vec2(0.0f,0.0f);
-//		button->touch_padding   = nk_vec2(0.0f,0.0f);
-//		button->userdata        = nk_handle_ptr(0);
-//		button->text_alignment  = NK_TEXT_CENTERED;
-//		button->border          = 0.0f;
-//		button->rounding        = 0.0f;
-//		button->draw_begin      = 0;
-//		button->draw_end        = 0;
 //
 //		/* window */
 //		win->background = table[NK_COLOR_WINDOW];
