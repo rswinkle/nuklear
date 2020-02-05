@@ -217,7 +217,198 @@ NK_TEXT_RIGHT       = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_RIGHT
 
 }
 
+static int style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_style)
+{
+	struct nk_style_toggle toggle = *out_style;
+	//toggle = &style->checkbox;
+	//nk_zero_struct(*toggle);
+	//toggle->normal          = nk_style_item_color(table[NK_COLOR_TOGGLE]);
+	//toggle->hover           = nk_style_item_color(table[NK_COLOR_TOGGLE_HOVER]);
+	//toggle->active          = nk_style_item_color(table[NK_COLOR_TOGGLE_HOVER]);
+	//toggle->cursor_normal   = nk_style_item_color(table[NK_COLOR_TOGGLE_CURSOR]);
+	//toggle->cursor_hover    = nk_style_item_color(table[NK_COLOR_TOGGLE_CURSOR]);
+	//toggle->userdata        = nk_handle_ptr(0);
+	//toggle->text_background = table[NK_COLOR_WINDOW];
+	//toggle->text_normal     = table[NK_COLOR_TEXT];
+	//toggle->text_hover      = table[NK_COLOR_TEXT];
+	//toggle->text_active     = table[NK_COLOR_TEXT];
+	//toggle->padding         = nk_vec2(2.0f, 2.0f);
+	//toggle->touch_padding   = nk_vec2(0,0);
+	//toggle->border_color    = nk_rgba(0,0,0,0);
+	//toggle->border          = 0.0f;
+	//toggle->spacing         = 4;
+	//
 
+	char buffer[64];
+
+	// Assumes all the style items are colors not images
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.active.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.cursor_normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.cursor_normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.cursor_hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.cursor_hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Background:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.text_background, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_background), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.text_background = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_normal), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.text_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_hover), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.text_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.text_active, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_active), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.text_active = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", toggle.padding.x, toggle.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &toggle.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &toggle.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Touch Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", toggle.touch_padding.x, toggle.touch_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &toggle.touch_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &toggle.touch_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, toggle.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.border_color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		toggle.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_property_float(ctx, "#Border:", -100.0f, &toggle.border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Spacing:", -100.0f, &toggle.spacing, 100.0f, 1,0.5f);
+
+
+	*out_style = toggle;
+
+}
 
 static int
 style_configurator(struct nk_context *ctx)
@@ -248,7 +439,6 @@ style_configurator(struct nk_context *ctx)
 	struct nk_style *style = &ctx->style;
 
 	struct nk_style_text text = style->text;
-	struct nk_style_toggle *toggle;
 	struct nk_style_selectable *select;
 	struct nk_style_slider *slider;
 	struct nk_style_progress *prog;
@@ -363,48 +553,21 @@ style_configurator(struct nk_context *ctx)
 			style_button(ctx, &style->window.header.minimize_button, NULL, 0);
 			nk_tree_pop(ctx);
 		}
+
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Checkbox", NK_MINIMIZED)) {
+			style_toggle(ctx, &style->checkbox);
+			nk_tree_pop(ctx);
+		}
+
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Option", NK_MINIMIZED)) {
+			style_toggle(ctx, &style->option);
+			nk_tree_pop(ctx);
+		}
+
+
 	}
 
 
-//
-//
-//		/* checkbox toggle */
-//		toggle = &style->checkbox;
-//		nk_zero_struct(*toggle);
-//		toggle->normal          = nk_style_item_color(table[NK_COLOR_TOGGLE]);
-//		toggle->hover           = nk_style_item_color(table[NK_COLOR_TOGGLE_HOVER]);
-//		toggle->active          = nk_style_item_color(table[NK_COLOR_TOGGLE_HOVER]);
-//		toggle->cursor_normal   = nk_style_item_color(table[NK_COLOR_TOGGLE_CURSOR]);
-//		toggle->cursor_hover    = nk_style_item_color(table[NK_COLOR_TOGGLE_CURSOR]);
-//		toggle->userdata        = nk_handle_ptr(0);
-//		toggle->text_background = table[NK_COLOR_WINDOW];
-//		toggle->text_normal     = table[NK_COLOR_TEXT];
-//		toggle->text_hover      = table[NK_COLOR_TEXT];
-//		toggle->text_active     = table[NK_COLOR_TEXT];
-//		toggle->padding         = nk_vec2(2.0f, 2.0f);
-//		toggle->touch_padding   = nk_vec2(0,0);
-//		toggle->border_color    = nk_rgba(0,0,0,0);
-//		toggle->border          = 0.0f;
-//		toggle->spacing         = 4;
-//
-//		/* option toggle */
-//		toggle = &style->option;
-//		nk_zero_struct(*toggle);
-//		toggle->normal          = nk_style_item_color(table[NK_COLOR_TOGGLE]);
-//		toggle->hover           = nk_style_item_color(table[NK_COLOR_TOGGLE_HOVER]);
-//		toggle->active          = nk_style_item_color(table[NK_COLOR_TOGGLE_HOVER]);
-//		toggle->cursor_normal   = nk_style_item_color(table[NK_COLOR_TOGGLE_CURSOR]);
-//		toggle->cursor_hover    = nk_style_item_color(table[NK_COLOR_TOGGLE_CURSOR]);
-//		toggle->userdata        = nk_handle_ptr(0);
-//		toggle->text_background = table[NK_COLOR_WINDOW];
-//		toggle->text_normal     = table[NK_COLOR_TEXT];
-//		toggle->text_hover      = table[NK_COLOR_TEXT];
-//		toggle->text_active     = table[NK_COLOR_TEXT];
-//		toggle->padding         = nk_vec2(3.0f, 3.0f);
-//		toggle->touch_padding   = nk_vec2(0,0);
-//		toggle->border_color    = nk_rgba(0,0,0,0);
-//		toggle->border          = 0.0f;
-//		toggle->spacing         = 4;
 //
 //		/* selectable */
 //		select = &style->selectable;
