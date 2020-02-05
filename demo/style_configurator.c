@@ -1042,6 +1042,11 @@ style_configurator(struct nk_context *ctx)
 		}
 
 
+		if (nk_button_label(ctx, "Reset all styles to defaults")) {
+			nk_style_default(ctx);
+		}
+
+
 	}
 
 //
