@@ -642,6 +642,243 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 }
 
 static int
+style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
+{
+	struct nk_style_slider slider = *out_style;
+	//slider = &style->slider;
+	//nk_zero_struct(*slider);
+	//slider->normal          = nk_style_item_hide();
+	//slider->hover           = nk_style_item_hide();
+	//slider->active          = nk_style_item_hide();
+	//slider->bar_normal      = table[NK_COLOR_SLIDER];
+	//slider->bar_hover       = table[NK_COLOR_SLIDER];
+	//slider->bar_active      = table[NK_COLOR_SLIDER];
+	//slider->bar_filled      = table[NK_COLOR_SLIDER_CURSOR];
+	//slider->cursor_normal   = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR]);
+	//slider->cursor_hover    = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR_HOVER]);
+	//slider->cursor_active   = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR_ACTIVE]);
+	//slider->inc_symbol      = NK_SYMBOL_TRIANGLE_RIGHT;
+	//slider->dec_symbol      = NK_SYMBOL_TRIANGLE_LEFT;
+	//slider->cursor_size     = nk_vec2(16,16);
+	//slider->padding         = nk_vec2(2,2);
+	//slider->spacing         = nk_vec2(2,2);
+	//slider->userdata        = nk_handle_ptr(0);
+	//slider->show_buttons    = nk_false;
+	//slider->bar_height      = 8;
+	//slider->rounding        = 0;
+	//slider->draw_begin      = 0;
+	//slider->draw_end        = 0;
+
+	char buffer[64];
+
+	// Assumes all the style items are colors not images
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+		colorf.a = nk_propertyf(ctx, "#A:", 0, colorf.a, 1.0f, 0.01f,0.005f);
+
+		slider.normal.data.color = nk_rgba_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+		colorf.a = nk_propertyf(ctx, "#A:", 0, colorf.a, 1.0f, 0.01f,0.005f);
+
+		slider.hover.data.color = nk_rgba_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.active.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+		colorf.a = nk_propertyf(ctx, "#A:", 0, colorf.a, 1.0f, 0.01f,0.005f);
+
+		slider.active.data.color = nk_rgba_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Bar Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.bar_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_normal), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.bar_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Bar Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.bar_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_hover), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.bar_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Bar Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.bar_active, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_active), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.bar_active = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Bar Filled:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.bar_filled, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_filled), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.bar_filled = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.cursor_normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.cursor_hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, slider.cursor_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_active.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		slider.cursor_active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	const char* symbols[NK_SYMBOL_MAX] =
+{
+    "NONE",
+    "X",
+    "UNDERSCORE",
+    "CIRCLE_SOLID",
+    "CIRCLE_OUTLINE",
+    "RECT_SOLID",
+    "RECT_OUTLINE",
+    "TRIANGLE_UP",
+    "TRIANGLE_DOWN",
+    "TRIANGLE_LEFT",
+    "TRIANGLE_RIGHT",
+    "PLUS",
+    "MINUS"
+};
+
+	nk_layout_row_dynamic(ctx, 30, 1);
+	nk_checkbox_label(ctx, "Show Buttons", &slider.show_buttons);
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+	if (slider.show_buttons) {
+		nk_label(ctx, "Inc Symbol:", NK_TEXT_LEFT);
+		slider.inc_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, slider.inc_symbol, 25, nk_vec2(200,200));
+		nk_label(ctx, "Dec Symbol:", NK_TEXT_LEFT);
+		slider.dec_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, slider.dec_symbol, 25, nk_vec2(200,200));
+	}
+
+	nk_label(ctx, "Cursor Size:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", slider.cursor_size.x, slider.cursor_size.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &slider.cursor_size.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &slider.cursor_size.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", slider.padding.x, slider.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &slider.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &slider.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Spacing:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", slider.spacing.x, slider.spacing.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &slider.spacing.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &slider.spacing.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_property_float(ctx, "#Bar Height:", -100.0f, &slider.bar_height, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Rounding:", -100.0f, &slider.rounding, 100.0f, 1,0.5f);
+
+	*out_style = slider;
+}
+
+static int
 style_configurator(struct nk_context *ctx)
 {
 	/* window flags */
@@ -799,36 +1036,14 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Slider", NK_MINIMIZED)) {
+			style_slider(ctx, &style->slider);
+			nk_tree_pop(ctx);
+		}
+
 
 	}
 
-
-//
-//
-//		/* slider */
-//		slider = &style->slider;
-//		nk_zero_struct(*slider);
-//		slider->normal          = nk_style_item_hide();
-//		slider->hover           = nk_style_item_hide();
-//		slider->active          = nk_style_item_hide();
-//		slider->bar_normal      = table[NK_COLOR_SLIDER];
-//		slider->bar_hover       = table[NK_COLOR_SLIDER];
-//		slider->bar_active      = table[NK_COLOR_SLIDER];
-//		slider->bar_filled      = table[NK_COLOR_SLIDER_CURSOR];
-//		slider->cursor_normal   = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR]);
-//		slider->cursor_hover    = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR_HOVER]);
-//		slider->cursor_active   = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR_ACTIVE]);
-//		slider->inc_symbol      = NK_SYMBOL_TRIANGLE_RIGHT;
-//		slider->dec_symbol      = NK_SYMBOL_TRIANGLE_LEFT;
-//		slider->cursor_size     = nk_vec2(16,16);
-//		slider->padding         = nk_vec2(2,2);
-//		slider->spacing         = nk_vec2(2,2);
-//		slider->userdata        = nk_handle_ptr(0);
-//		slider->show_buttons    = nk_false;
-//		slider->bar_height      = 8;
-//		slider->rounding        = 0;
-//		slider->draw_begin      = 0;
-//		slider->draw_end        = 0;
 //
 //		/* progressbar */
 //		prog = &style->progress;
