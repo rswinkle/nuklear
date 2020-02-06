@@ -822,33 +822,6 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 		nk_combo_end(ctx);
 	}
 
-	const char* symbols[NK_SYMBOL_MAX] =
-{
-    "NONE",
-    "X",
-    "UNDERSCORE",
-    "CIRCLE_SOLID",
-    "CIRCLE_OUTLINE",
-    "RECT_SOLID",
-    "RECT_OUTLINE",
-    "TRIANGLE_UP",
-    "TRIANGLE_DOWN",
-    "TRIANGLE_LEFT",
-    "TRIANGLE_RIGHT",
-    "PLUS",
-    "MINUS"
-};
-
-	nk_layout_row_dynamic(ctx, 30, 1);
-	nk_checkbox_label(ctx, "Show Buttons", &slider.show_buttons);
-
-	nk_layout_row_dynamic(ctx, 30, 2);
-	if (slider.show_buttons) {
-		nk_label(ctx, "Inc Symbol:", NK_TEXT_LEFT);
-		slider.inc_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, slider.inc_symbol, 25, nk_vec2(200,200));
-		nk_label(ctx, "Dec Symbol:", NK_TEXT_LEFT);
-		slider.dec_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, slider.dec_symbol, 25, nk_vec2(200,200));
-	}
 
 	nk_label(ctx, "Cursor Size:", NK_TEXT_LEFT);
 	sprintf(buffer, "%.2f, %.2f", slider.cursor_size.x, slider.cursor_size.y);
@@ -879,6 +852,43 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 
 	nk_property_float(ctx, "#Bar Height:", -100.0f, &slider.bar_height, 100.0f, 1,0.5f);
 	nk_property_float(ctx, "#Rounding:", -100.0f, &slider.rounding, 100.0f, 1,0.5f);
+
+	const char* symbols[NK_SYMBOL_MAX] =
+{
+    "NONE",
+    "X",
+    "UNDERSCORE",
+    "CIRCLE_SOLID",
+    "CIRCLE_OUTLINE",
+    "RECT_SOLID",
+    "RECT_OUTLINE",
+    "TRIANGLE_UP",
+    "TRIANGLE_DOWN",
+    "TRIANGLE_LEFT",
+    "TRIANGLE_RIGHT",
+    "PLUS",
+    "MINUS"
+};
+
+	nk_layout_row_dynamic(ctx, 30, 1);
+	nk_checkbox_label(ctx, "Show Buttons", &slider.show_buttons);
+
+	if (slider.show_buttons) {
+		nk_layout_row_dynamic(ctx, 30, 2);
+		nk_label(ctx, "Inc Symbol:", NK_TEXT_LEFT);
+		slider.inc_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, slider.inc_symbol, 25, nk_vec2(200,200));
+		nk_label(ctx, "Dec Symbol:", NK_TEXT_LEFT);
+		slider.dec_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, slider.dec_symbol, 25, nk_vec2(200,200));
+
+		// necessary or do tree's always take the whole width?
+		//nk_layout_row_dynamic(ctx, 30, 1);
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Slider Buttons", NK_MINIMIZED)) {
+			struct nk_style_button* dups[1] = { &ctx->style.slider.dec_button };
+			style_button(ctx, &ctx->style.slider.inc_button, dups, 1);
+			nk_tree_pop(ctx);
+		}
+
+	}
 
 	*out_style = slider;
 }
@@ -1159,35 +1169,6 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 		nk_combo_end(ctx);
 	}
 
-	const char* symbols[NK_SYMBOL_MAX] =
-{
-    "NONE",
-    "X",
-    "UNDERSCORE",
-    "CIRCLE_SOLID",
-    "CIRCLE_OUTLINE",
-    "RECT_SOLID",
-    "RECT_OUTLINE",
-    "TRIANGLE_UP",
-    "TRIANGLE_DOWN",
-    "TRIANGLE_LEFT",
-    "TRIANGLE_RIGHT",
-    "PLUS",
-    "MINUS"
-};
-
-	// TODO what is wrong with scrollbar button?  Also look into controlling the total width (and height) of scrollbars
-	nk_layout_row_dynamic(ctx, 30, 1);
-	nk_checkbox_label(ctx, "Show Buttons", &scroll.show_buttons);
-
-	nk_layout_row_dynamic(ctx, 30, 2);
-	if (scroll.show_buttons) {
-		nk_label(ctx, "Inc Symbol:", NK_TEXT_LEFT);
-		scroll.inc_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, scroll.inc_symbol, 25, nk_vec2(200,200));
-		nk_label(ctx, "Dec Symbol:", NK_TEXT_LEFT);
-		scroll.dec_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, scroll.dec_symbol, 25, nk_vec2(200,200));
-	}
-
 	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
@@ -1231,6 +1212,47 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	// TODO naming inconsistency with style_scrollress?
 	nk_property_float(ctx, "#Cursor Border:", -100.0f, &scroll.border_cursor, 100.0f, 1,0.5f);
 	nk_property_float(ctx, "#Cursor Rounding:", -100.0f, &scroll.rounding_cursor, 100.0f, 1,0.5f);
+
+
+	const char* symbols[NK_SYMBOL_MAX] =
+{
+    "NONE",
+    "X",
+    "UNDERSCORE",
+    "CIRCLE_SOLID",
+    "CIRCLE_OUTLINE",
+    "RECT_SOLID",
+    "RECT_OUTLINE",
+    "TRIANGLE_UP",
+    "TRIANGLE_DOWN",
+    "TRIANGLE_LEFT",
+    "TRIANGLE_RIGHT",
+    "PLUS",
+    "MINUS"
+};
+
+	// TODO what is wrong with scrollbar buttons?  Also look into controlling the total width (and height) of scrollbars
+	nk_layout_row_dynamic(ctx, 30, 1);
+	nk_checkbox_label(ctx, "Show Buttons", &scroll.show_buttons);
+
+	if (scroll.show_buttons) {
+		nk_layout_row_dynamic(ctx, 30, 2);
+		nk_label(ctx, "Inc Symbol:", NK_TEXT_LEFT);
+		scroll.inc_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, scroll.inc_symbol, 25, nk_vec2(200,200));
+		nk_label(ctx, "Dec Symbol:", NK_TEXT_LEFT);
+		scroll.dec_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, scroll.dec_symbol, 25, nk_vec2(200,200));
+
+		//nk_layout_row_dynamic(ctx, 30, 1);
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Scrollbar Buttons", NK_MINIMIZED)) {
+			// TODO best way to handle correctly with duplicate styles
+			struct nk_style_button* dups[3] = { &ctx->style.scrollh.dec_button,
+			                                    &ctx->style.scrollv.inc_button,
+			                                    &ctx->style.scrollv.dec_button };
+			style_button(ctx, &ctx->style.scrollh.inc_button, dups, 3);
+			nk_tree_pop(ctx);
+		}
+	}
+
 
 	//style->scrollv = style->scrollh;
 
@@ -1333,20 +1355,6 @@ style_configurator(struct nk_context *ctx)
 
 		if (nk_tree_push(ctx, NK_TREE_TAB, "Menu Button", NK_MINIMIZED)) {
 			style_button(ctx, &style->menu_button, NULL, 0);
-			nk_tree_pop(ctx);
-		}
-
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Slider Buttons", NK_MINIMIZED)) {
-			struct nk_style_button* dups[1] = { &style->slider.dec_button };
-			style_button(ctx, &style->slider.inc_button, dups, 1);
-			nk_tree_pop(ctx);
-		}
-
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Scrollbar Buttons", NK_MINIMIZED)) {
-			struct nk_style_button* dups[3] = { &style->scrollh.dec_button,
-			                                          &style->scrollv.inc_button,
-			                                          &style->scrollv.dec_button };
-			style_button(ctx, &style->scrollh.inc_button, dups, 3);
 			nk_tree_pop(ctx);
 		}
 
