@@ -1,5 +1,10 @@
 
-static int
+// TODO design decisions
+// plural or not?  ie style_button or style_buttons?
+// use the duplicate array method, or just yet the user
+// manually set those after calling the function by accessing ctx->style->*?
+
+static void
 style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct nk_style_button** duplicate_styles, int n_dups)
 {
 	struct nk_style_button button = *out_style;
@@ -217,7 +222,7 @@ NK_TEXT_RIGHT       = NK_TEXT_ALIGN_MIDDLE|NK_TEXT_ALIGN_RIGHT
 
 }
 
-static int style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_style)
+static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_style)
 {
 	struct nk_style_toggle toggle = *out_style;
 	//toggle = &style->checkbox;
@@ -410,7 +415,7 @@ static int style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_styl
 
 }
 
-static int
+static void
 style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 {
 	struct nk_style_selectable select = *out_style;
@@ -641,7 +646,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	*out_style = select;
 }
 
-static int
+static void
 style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 {
 	struct nk_style_slider slider = *out_style;
@@ -890,7 +895,6 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	//prog->cursor_normal     = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR]);
 	//prog->cursor_hover      = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR_HOVER]);
 	//prog->cursor_active     = nk_style_item_color(table[NK_COLOR_SLIDER_CURSOR_ACTIVE]);
-	//
 	//prog->border_color      = nk_rgba(0,0,0,0);
 	//prog->cursor_border_color = nk_rgba(0,0,0,0);
 	//prog->userdata          = nk_handle_ptr(0);
@@ -1038,6 +1042,206 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	*out_style = prog;
 }
 
+static void
+style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, struct nk_style_scrollbar** duplicate_styles, int n_dups)
+{
+	struct nk_style_scrollbar scroll = *out_style;
+	//scroll = &style->scrollh;
+	//nk_zero_struct(*scroll);
+	//scroll->normal          = nk_style_item_color(table[NK_COLOR_SCROLLBAR]);
+	//scroll->hover           = nk_style_item_color(table[NK_COLOR_SCROLLBAR]);
+	//scroll->active          = nk_style_item_color(table[NK_COLOR_SCROLLBAR]);
+	//scroll->cursor_normal   = nk_style_item_color(table[NK_COLOR_SCROLLBAR_CURSOR]);
+	//scroll->cursor_hover    = nk_style_item_color(table[NK_COLOR_SCROLLBAR_CURSOR_HOVER]);
+	//scroll->cursor_active   = nk_style_item_color(table[NK_COLOR_SCROLLBAR_CURSOR_ACTIVE]);
+	//scroll->dec_symbol      = NK_SYMBOL_CIRCLE_SOLID;
+	//scroll->inc_symbol      = NK_SYMBOL_CIRCLE_SOLID;
+	//scroll->userdata        = nk_handle_ptr(0);
+	//scroll->border_color    = table[NK_COLOR_SCROLLBAR];
+	//scroll->cursor_border_color = table[NK_COLOR_SCROLLBAR];
+	//scroll->padding         = nk_vec2(0,0);
+	//scroll->show_buttons    = nk_false;
+	//scroll->border          = 0;
+	//scroll->rounding        = 0;
+	//scroll->border_cursor   = 0;
+	//scroll->rounding_cursor = 0;
+	//scroll->draw_begin      = 0;
+	//scroll->draw_end        = 0;
+	//style->scrollv = style->scrollh;
+
+	char buffer[64];
+
+	// Assumes all the style items are colors not images
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.active.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+
+	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_normal.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.cursor_normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_hover.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.cursor_hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.cursor_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_active.data.color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.cursor_active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	const char* symbols[NK_SYMBOL_MAX] =
+{
+    "NONE",
+    "X",
+    "UNDERSCORE",
+    "CIRCLE_SOLID",
+    "CIRCLE_OUTLINE",
+    "RECT_SOLID",
+    "RECT_OUTLINE",
+    "TRIANGLE_UP",
+    "TRIANGLE_DOWN",
+    "TRIANGLE_LEFT",
+    "TRIANGLE_RIGHT",
+    "PLUS",
+    "MINUS"
+};
+
+	// TODO what is wrong with scrollbar button?  Also look into controlling the total width (and height) of scrollbars
+	nk_layout_row_dynamic(ctx, 30, 1);
+	nk_checkbox_label(ctx, "Show Buttons", &scroll.show_buttons);
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+	if (scroll.show_buttons) {
+		nk_label(ctx, "Inc Symbol:", NK_TEXT_LEFT);
+		scroll.inc_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, scroll.inc_symbol, 25, nk_vec2(200,200));
+		nk_label(ctx, "Dec Symbol:", NK_TEXT_LEFT);
+		scroll.dec_symbol = nk_combo(ctx, symbols, NK_SYMBOL_MAX, scroll.dec_symbol, 25, nk_vec2(200,200));
+	}
+
+	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.border_color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Border Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, scroll.cursor_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_border_color), NK_RGBA);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		scroll.cursor_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", scroll.padding.x, scroll.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &scroll.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &scroll.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_property_float(ctx, "#Border:", -100.0f, &scroll.border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Rounding:", -100.0f, &scroll.rounding, 100.0f, 1,0.5f);
+
+	// TODO naming inconsistency with style_scrollress?
+	nk_property_float(ctx, "#Cursor Border:", -100.0f, &scroll.border_cursor, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Cursor Rounding:", -100.0f, &scroll.rounding_cursor, 100.0f, 1,0.5f);
+
+	//style->scrollv = style->scrollh;
+
+	*out_style = scroll;
+	if (duplicate_styles) {
+		for (int i=0; i<n_dups; ++i) {
+			*duplicate_styles[i] = scroll;
+		}
+	}
+}
+
 static int
 style_configurator(struct nk_context *ctx)
 {
@@ -1067,7 +1271,6 @@ style_configurator(struct nk_context *ctx)
 	struct nk_style *style = &ctx->style;
 
 	struct nk_style_text text = style->text;
-	struct nk_style_scrollbar *scroll;
 	struct nk_style_edit *edit;
 	struct nk_style_property *property;
 	struct nk_style_combo *combo;
@@ -1163,7 +1366,7 @@ style_configurator(struct nk_context *ctx)
 			style_button(ctx, &style->tab.tab_minimize_button, dups, 1);
 			nk_tree_pop(ctx);
 		}
-		if (nk_tree_push(ctx, NK_TREE_TAB, "Nobe Min/Max Buttons", NK_MINIMIZED)) {
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Node Min/Max Buttons", NK_MINIMIZED)) {
 			struct nk_style_button* dups[1] = { &style->tab.node_maximize_button };
 			style_button(ctx, &style->tab.node_minimize_button, dups, 1);
 			nk_tree_pop(ctx);
@@ -1205,6 +1408,11 @@ style_configurator(struct nk_context *ctx)
 		}
 
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Scrollbars", NK_MINIMIZED)) {
+			struct nk_style_scrollbar* dups[1] = { &style->scrollv };
+			style_scrollbars(ctx, &style->scrollh, dups, 1);
+			nk_tree_pop(ctx);
+		}
 
 
 
@@ -1214,31 +1422,6 @@ style_configurator(struct nk_context *ctx)
 
 	}
 
-//
-//
-//		/* scrollbars */
-//		scroll = &style->scrollh;
-//		nk_zero_struct(*scroll);
-//		scroll->normal          = nk_style_item_color(table[NK_COLOR_SCROLLBAR]);
-//		scroll->hover           = nk_style_item_color(table[NK_COLOR_SCROLLBAR]);
-//		scroll->active          = nk_style_item_color(table[NK_COLOR_SCROLLBAR]);
-//		scroll->cursor_normal   = nk_style_item_color(table[NK_COLOR_SCROLLBAR_CURSOR]);
-//		scroll->cursor_hover    = nk_style_item_color(table[NK_COLOR_SCROLLBAR_CURSOR_HOVER]);
-//		scroll->cursor_active   = nk_style_item_color(table[NK_COLOR_SCROLLBAR_CURSOR_ACTIVE]);
-//		scroll->dec_symbol      = NK_SYMBOL_CIRCLE_SOLID;
-//		scroll->inc_symbol      = NK_SYMBOL_CIRCLE_SOLID;
-//		scroll->userdata        = nk_handle_ptr(0);
-//		scroll->border_color    = table[NK_COLOR_SCROLLBAR];
-//		scroll->cursor_border_color = table[NK_COLOR_SCROLLBAR];
-//		scroll->padding         = nk_vec2(0,0);
-//		scroll->show_buttons    = nk_false;
-//		scroll->border          = 0;
-//		scroll->rounding        = 0;
-//		scroll->border_cursor   = 0;
-//		scroll->rounding_cursor = 0;
-//		scroll->draw_begin      = 0;
-//		scroll->draw_end        = 0;
-//		style->scrollv = style->scrollh;
 //
 //		/* edit */
 //		edit = &style->edit;
