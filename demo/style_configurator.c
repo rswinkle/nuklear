@@ -3,6 +3,64 @@
 // plural or not?  ie style_button or style_buttons?
 // use the duplicate array method, or just yet the user
 // manually set those after calling the function by accessing ctx->style->*?
+//
+
+// style_general? pass array in instead of static?
+static void
+style_colors(struct nk_context* ctx, struct nk_color color_table[NK_COLOR_COUNT])
+{
+	const char* color_labels[NK_COLOR_COUNT] =
+	{
+		"COLOR_TEXT:",
+		"COLOR_WINDOW:",
+		"COLOR_HEADER:",
+		"COLOR_BORDER:",
+		"COLOR_BUTTON:",
+		"COLOR_BUTTON_HOVER:",
+		"COLOR_BUTTON_ACTIVE:",
+		"COLOR_TOGGLE:",
+		"COLOR_TOGGLE_HOVER:",
+		"COLOR_TOGGLE_CURSOR:",
+		"COLOR_SELECT:",
+		"COLOR_SELECT_ACTIVE:",
+		"COLOR_SLIDER:",
+		"COLOR_SLIDER_CURSOR:",
+		"COLOR_SLIDER_CURSOR_HOVER:",
+		"COLOR_SLIDER_CURSOR_ACTIVE:",
+		"COLOR_PROPERTY:",
+		"COLOR_EDIT:",
+		"COLOR_EDIT_CURSOR:",
+		"COLOR_COMBO:",
+		"COLOR_CHART:",
+		"COLOR_CHART_COLOR:",
+		"COLOR_CHART_COLOR_HIGHLIGHT:",
+		"COLOR_SCROLLBAR:",
+		"COLOR_SCROLLBAR_CURSOR:",
+		"COLOR_SCROLLBAR_CURSOR_HOVER:",
+		"COLOR_SCROLLBAR_CURSOR_ACTIVE:",
+		"COLOR_TAB_HEADER:"
+	};
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+	for (int i=0; i<NK_COLOR_COUNT; ++i) {
+		nk_label(ctx, color_labels[i], NK_TEXT_LEFT);
+
+		if (nk_combo_begin_color(ctx, color_table[i], nk_vec2(nk_widget_width(ctx), 400))) {
+			nk_layout_row_dynamic(ctx, 120, 1);
+			struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(color_table[i]), NK_RGB);
+			nk_layout_row_dynamic(ctx, 25, 1);
+			colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+			colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+			colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+			color_table[i] = nk_rgb_cf(colorf);
+
+			nk_combo_end(ctx);
+		}
+	}
+
+	nk_style_from_table(ctx, color_table);
+}
 
 static void
 style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct nk_style_button** duplicate_styles, int n_dups)
@@ -1300,13 +1358,22 @@ style_configurator(struct nk_context *ctx)
 	struct nk_style_tab *tab;
 	struct nk_style_window *win;
 
-	// TODO allow external table
-	const struct nk_color* table = nk_default_color_style;
+	// TODO better way?
+	static int initialized = nk_false;
+	static struct nk_color color_table[NK_COLOR_COUNT];
 
+	if (!initialized) {
+		memcpy(color_table, nk_default_color_style, sizeof(color_table));
+		initialized = nk_true;
+	}
 
 
 	if (nk_begin(ctx, "Configurator", nk_rect(10, 10, 400, 600), window_flags))
 	{
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Colors", NK_MINIMIZED)) {
+			style_colors(ctx, color_table);
+			nk_tree_pop(ctx);
+		}
 
 		if (nk_tree_push(ctx, NK_TREE_TAB, "Text", NK_MINIMIZED)) {
 			//text = &style->text;
