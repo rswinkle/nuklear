@@ -94,7 +94,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -108,7 +108,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -122,7 +122,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -136,7 +136,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Border:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.border_color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.border_color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -150,7 +150,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Text Background:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.text_background, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_background), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_background), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -164,7 +164,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_normal), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_normal), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -178,7 +178,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_hover), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_hover), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -192,7 +192,7 @@ style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct n
 	nk_label(ctx, "Text Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, button.text_active, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_active), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(button.text_active), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -310,7 +310,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -324,7 +324,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -338,7 +338,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -352,7 +352,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.cursor_normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.cursor_normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -366,7 +366,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.cursor_hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.cursor_hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -380,7 +380,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Text Background:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.text_background, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_background), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_background), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -394,7 +394,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_normal), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_normal), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -408,7 +408,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_hover), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_hover), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -422,7 +422,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Text Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.text_active, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_active), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.text_active), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -454,7 +454,7 @@ static void style_toggle(struct nk_context* ctx, struct nk_style_toggle* out_sty
 	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, toggle.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.border_color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(toggle.border_color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -506,7 +506,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -520,7 +520,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -534,7 +534,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Pressed:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.pressed.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.pressed.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.pressed.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -548,7 +548,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Normal Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.normal_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.normal_active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.normal_active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -562,7 +562,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Hover Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.hover_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.hover_active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.hover_active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -576,7 +576,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Pressed Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.pressed_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.pressed_active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.pressed_active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -590,7 +590,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_normal), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_normal), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -604,7 +604,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_hover), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_hover), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -618,7 +618,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Text Pressed:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.text_pressed, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_pressed), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_pressed), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -632,7 +632,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Text Normal Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.text_normal_active, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_normal_active), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_normal_active), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -646,7 +646,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Text Hover Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.text_hover_active, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_hover_active), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_hover_active), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -660,7 +660,7 @@ style_selectable(struct nk_context* ctx, struct nk_style_selectable* out_style)
 	nk_label(ctx, "Text Pressed Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, select.text_pressed_active, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_pressed_active), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(select.text_pressed_active), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -785,7 +785,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Bar Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.bar_normal, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_normal), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_normal), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -799,7 +799,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Bar Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.bar_hover, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_hover), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_hover), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -813,7 +813,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Bar Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.bar_active, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_active), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_active), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -827,7 +827,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Bar Filled:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.bar_filled, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_filled), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.bar_filled), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -841,7 +841,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -855,7 +855,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -869,7 +869,7 @@ style_slider(struct nk_context* ctx, struct nk_style_slider* out_style)
 	nk_label(ctx, "Cursor Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, slider.cursor_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(slider.cursor_active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -982,7 +982,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -996,7 +996,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1010,7 +1010,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1025,7 +1025,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1039,7 +1039,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1053,7 +1053,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Cursor Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.cursor_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1067,7 +1067,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.border_color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.border_color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1081,7 +1081,7 @@ style_progress(struct nk_context* ctx, struct nk_style_progress* out_style)
 	nk_label(ctx, "Cursor Border Color:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, prog.cursor_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_border_color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(prog.cursor_border_color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1145,7 +1145,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1159,7 +1159,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1173,7 +1173,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1188,7 +1188,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.cursor_normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_normal.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_normal.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1202,7 +1202,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.cursor_hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_hover.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_hover.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1216,7 +1216,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Cursor Active:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.cursor_active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_active.data.color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_active.data.color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1230,7 +1230,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.border_color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.border_color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1244,7 +1244,7 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	nk_label(ctx, "Cursor Border Color:", NK_TEXT_LEFT);
 	if (nk_combo_begin_color(ctx, scroll.cursor_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
 		nk_layout_row_dynamic(ctx, 120, 1);
-		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_border_color), NK_RGBA);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(scroll.cursor_border_color), NK_RGB);
 		nk_layout_row_dynamic(ctx, 25, 1);
 		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
@@ -1386,7 +1386,7 @@ style_configurator(struct nk_context *ctx)
 			nk_label(ctx, "Color:", NK_TEXT_LEFT);
 			if (nk_combo_begin_color(ctx, text.color, nk_vec2(nk_widget_width(ctx), 400))) {
 				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(text.color), NK_RGBA);
+				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(text.color), NK_RGB);
 				nk_layout_row_dynamic(ctx, 25, 1);
 				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
 				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
