@@ -5,6 +5,8 @@
 // manually set those after calling the function by accessing ctx->style->*?
 //
 
+
+
 // style_general? pass array in instead of static?
 static void
 style_colors(struct nk_context* ctx, struct nk_color color_table[NK_COLOR_COUNT])
@@ -61,6 +63,44 @@ style_colors(struct nk_context* ctx, struct nk_color color_table[NK_COLOR_COUNT]
 
 	nk_style_from_table(ctx, color_table);
 }
+
+static void
+style_text(struct nk_context* ctx, struct nk_style_text* out_style)
+{
+	struct nk_style_text text = *out_style;
+	//text = &style->text;
+	//text->color = table[NK_COLOR_TEXT];
+	//text->padding = nk_vec2(0,0);
+
+	char buffer[64];
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+	nk_label(ctx, "Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, text.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(text.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		text.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", text.padding.x, text.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &text.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &text.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	*out_style = text;
+}
+
 
 static void
 style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct nk_style_button** duplicate_styles, int n_dups)
@@ -1376,37 +1416,7 @@ style_configurator(struct nk_context *ctx)
 		}
 
 		if (nk_tree_push(ctx, NK_TREE_TAB, "Text", NK_MINIMIZED)) {
-			//text = &style->text;
-			//text->color = table[NK_COLOR_TEXT];
-			//text->padding = nk_vec2(0,0);
-
-			char buffer[64];
-
-			nk_layout_row_dynamic(ctx, 30, 2);
-			nk_label(ctx, "Color:", NK_TEXT_LEFT);
-			if (nk_combo_begin_color(ctx, text.color, nk_vec2(nk_widget_width(ctx), 400))) {
-				nk_layout_row_dynamic(ctx, 120, 1);
-				struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(text.color), NK_RGB);
-				nk_layout_row_dynamic(ctx, 25, 1);
-				colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
-				colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
-				colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
-
-				text.color = nk_rgb_cf(colorf);
-
-				nk_combo_end(ctx);
-			}
-
-			nk_label(ctx, "Padding:", NK_TEXT_LEFT);
-			sprintf(buffer, "%.2f, %.2f", text.padding.x, text.padding.y);
-			if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
-				nk_layout_row_dynamic(ctx, 25, 1);
-				nk_property_float(ctx, "#X:", -100.0f, &text.padding.x, 100.0f, 1,0.5f);
-				nk_property_float(ctx, "#Y:", -100.0f, &text.padding.y, 100.0f, 1,0.5f);
-				nk_combo_end(ctx);
-			}
-			style->text = text;
-
+			style_text(ctx, &style->text);
 			nk_tree_pop(ctx);
 		}
 
