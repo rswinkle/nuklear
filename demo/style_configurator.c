@@ -3,9 +3,6 @@
 // plural or not?  ie style_button or style_buttons?
 // use the duplicate array method, or just yet the user
 // manually set those after calling the function by accessing ctx->style->*?
-//
-
-
 
 // style_general? pass array in instead of static?
 static void
@@ -100,7 +97,6 @@ style_text(struct nk_context* ctx, struct nk_style_text* out_style)
 
 	*out_style = text;
 }
-
 
 static void
 style_button(struct nk_context* ctx, struct nk_style_button* out_style, struct nk_style_button** duplicate_styles, int n_dups)
@@ -1362,6 +1358,280 @@ style_scrollbars(struct nk_context* ctx, struct nk_style_scrollbar* out_style, s
 	}
 }
 
+static void
+style_edit(struct nk_context* ctx, struct nk_style_edit* out_style)
+{
+	struct nk_style_edit edit = *out_style;
+	//edit = &style->edit;
+	//nk_zero_struct(*edit);
+	//edit->normal            = nk_style_item_color(table[NK_COLOR_EDIT]);
+	//edit->hover             = nk_style_item_color(table[NK_COLOR_EDIT]);
+	//edit->active            = nk_style_item_color(table[NK_COLOR_EDIT]);
+	//edit->cursor_normal     = table[NK_COLOR_TEXT];
+	//edit->cursor_hover      = table[NK_COLOR_TEXT];
+	//edit->cursor_text_normal= table[NK_COLOR_EDIT];
+	//edit->cursor_text_hover = table[NK_COLOR_EDIT];
+	//edit->border_color      = table[NK_COLOR_BORDER];
+	//edit->text_normal       = table[NK_COLOR_TEXT];
+	//edit->text_hover        = table[NK_COLOR_TEXT];
+	//edit->text_active       = table[NK_COLOR_TEXT];
+	//edit->selected_normal   = table[NK_COLOR_TEXT];
+	//edit->selected_hover    = table[NK_COLOR_TEXT];
+	//edit->selected_text_normal  = table[NK_COLOR_EDIT];
+	//edit->selected_text_hover   = table[NK_COLOR_EDIT];
+	//edit->scrollbar_size    = nk_vec2(10,10);
+	//edit->scrollbar         = style->scrollv;
+	//edit->padding           = nk_vec2(4,4);
+	//edit->row_padding       = 2;
+	//edit->cursor_size       = 4;
+	//edit->border            = 1;
+	//edit->rounding          = 0;
+
+	char buffer[64];
+
+	// Assumes all the style items are colors not images
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.normal.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.hover.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.active.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.cursor_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.cursor_normal), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.cursor_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.cursor_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.cursor_hover), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.cursor_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Text Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.cursor_text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.cursor_text_normal), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.cursor_text_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Cursor Text Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.cursor_text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.cursor_text_hover), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.cursor_text_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.text_normal), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.text_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.text_hover), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.text_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Text Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.text_active, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.text_active), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.text_active = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Selected Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.selected_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.selected_normal), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.selected_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Selected Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.selected_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.selected_hover), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.selected_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Selected Text Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.selected_text_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.selected_text_normal), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.selected_text_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Selected Text Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, edit.selected_text_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(edit.selected_text_hover), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		edit.selected_text_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Scrollbar Size:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", edit.scrollbar_size.x, edit.scrollbar_size.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &edit.scrollbar_size.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &edit.scrollbar_size.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", edit.padding.x, edit.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &edit.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &edit.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	// TODO subtree?
+	//edit->scrollbar         = style->scrollv;
+
+	nk_property_float(ctx, "#Row Padding:", -100.0f, &edit.row_padding, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Cursor Size:", -100.0f, &edit.cursor_size, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Border:", -100.0f, &edit.border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Rounding:", -100.0f, &edit.rounding, 100.0f, 1,0.5f);
+
+
+	*out_style = edit;
+}
+
 static int
 style_configurator(struct nk_context *ctx)
 {
@@ -1390,8 +1660,6 @@ style_configurator(struct nk_context *ctx)
 
 	struct nk_style *style = &ctx->style;
 
-	struct nk_style_text text = style->text;
-	struct nk_style_edit *edit;
 	struct nk_style_property *property;
 	struct nk_style_combo *combo;
 	struct nk_style_chart *chart;
@@ -1499,6 +1767,11 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Edit", NK_MINIMIZED)) {
+			style_edit(ctx, &style->edit);
+			nk_tree_pop(ctx);
+		}
+
 
 
 		if (nk_button_label(ctx, "Reset all styles to defaults")) {
@@ -1508,31 +1781,6 @@ style_configurator(struct nk_context *ctx)
 	}
 
 //
-//		/* edit */
-//		edit = &style->edit;
-//		nk_zero_struct(*edit);
-//		edit->normal            = nk_style_item_color(table[NK_COLOR_EDIT]);
-//		edit->hover             = nk_style_item_color(table[NK_COLOR_EDIT]);
-//		edit->active            = nk_style_item_color(table[NK_COLOR_EDIT]);
-//		edit->cursor_normal     = table[NK_COLOR_TEXT];
-//		edit->cursor_hover      = table[NK_COLOR_TEXT];
-//		edit->cursor_text_normal= table[NK_COLOR_EDIT];
-//		edit->cursor_text_hover = table[NK_COLOR_EDIT];
-//		edit->border_color      = table[NK_COLOR_BORDER];
-//		edit->text_normal       = table[NK_COLOR_TEXT];
-//		edit->text_hover        = table[NK_COLOR_TEXT];
-//		edit->text_active       = table[NK_COLOR_TEXT];
-//		edit->selected_normal   = table[NK_COLOR_TEXT];
-//		edit->selected_hover    = table[NK_COLOR_TEXT];
-//		edit->selected_text_normal  = table[NK_COLOR_EDIT];
-//		edit->selected_text_hover   = table[NK_COLOR_EDIT];
-//		edit->scrollbar_size    = nk_vec2(10,10);
-//		edit->scrollbar         = style->scrollv;
-//		edit->padding           = nk_vec2(4,4);
-//		edit->row_padding       = 2;
-//		edit->cursor_size       = 4;
-//		edit->border            = 1;
-//		edit->rounding          = 0;
 //
 //		/* property */
 //		property = &style->property;
