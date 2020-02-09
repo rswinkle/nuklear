@@ -1897,6 +1897,187 @@ style_chart(struct nk_context* ctx, struct nk_style_chart* out_style)
 	*out_style = chart;
 }
 
+static void
+style_combo(struct nk_context* ctx, struct nk_style_combo* out_style)
+{
+	struct nk_style_combo combo = *out_style;
+	//combo = &style->combo;
+	//combo->normal           = nk_style_item_color(table[NK_COLOR_COMBO]);
+	//combo->hover            = nk_style_item_color(table[NK_COLOR_COMBO]);
+	//combo->active           = nk_style_item_color(table[NK_COLOR_COMBO]);
+	//combo->border_color     = table[NK_COLOR_BORDER];
+	//combo->label_normal     = table[NK_COLOR_TEXT];
+	//combo->label_hover      = table[NK_COLOR_TEXT];
+	//combo->label_active     = table[NK_COLOR_TEXT];
+	//combo->sym_normal       = NK_SYMBOL_TRIANGLE_DOWN;
+	//combo->sym_hover        = NK_SYMBOL_TRIANGLE_DOWN;
+	//combo->sym_active       = NK_SYMBOL_TRIANGLE_DOWN;
+	//combo->content_padding  = nk_vec2(4,4);
+	//combo->button_padding   = nk_vec2(0,4);
+	//combo->spacing          = nk_vec2(4,0);
+	//combo->border           = 1;
+	//combo->rounding         = 0;
+
+	char buffer[64];
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.normal.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.normal.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.normal.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.hover.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.hover.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.hover.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.active.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.active.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.active.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Label Normal:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.label_normal, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.label_normal), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.label_normal = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Label Hover:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.label_hover, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.label_hover), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.label_hover = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Label Active:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, combo.label_active, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(combo.label_active), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		combo.label_active = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	const char* symbols[NK_SYMBOL_MAX] =
+{
+    "NONE",
+    "X",
+    "UNDERSCORE",
+    "CIRCLE_SOLID",
+    "CIRCLE_OUTLINE",
+    "RECT_SOLID",
+    "RECT_OUTLINE",
+    "TRIANGLE_UP",
+    "TRIANGLE_DOWN",
+    "TRIANGLE_LEFT",
+    "TRIANGLE_RIGHT",
+    "PLUS",
+    "MINUS"
+};
+
+	nk_label(ctx, "Normal Symbol:", NK_TEXT_LEFT);
+	combo.sym_normal = nk_combo(ctx, symbols, NK_SYMBOL_MAX, combo.sym_normal, 25, nk_vec2(200,200));
+	nk_label(ctx, "Hover Symbol:", NK_TEXT_LEFT);
+	combo.sym_hover = nk_combo(ctx, symbols, NK_SYMBOL_MAX, combo.sym_hover, 25, nk_vec2(200,200));
+	nk_label(ctx, "Active Symbol:", NK_TEXT_LEFT);
+	combo.sym_active = nk_combo(ctx, symbols, NK_SYMBOL_MAX, combo.sym_active, 25, nk_vec2(200,200));
+
+
+	nk_label(ctx, "Content Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", combo.content_padding.x, combo.content_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &combo.content_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &combo.content_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Button Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", combo.button_padding.x, combo.button_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &combo.button_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &combo.button_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Spacing:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", combo.spacing.x, combo.spacing.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &combo.spacing.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &combo.spacing.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_property_float(ctx, "#Border:", -100.0f, &combo.border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Rounding:", -100.0f, &combo.rounding, 100.0f, 1,0.5f);
+
+	*out_style = combo;
+}
+
 static int
 style_configurator(struct nk_context *ctx)
 {
@@ -1925,7 +2106,6 @@ style_configurator(struct nk_context *ctx)
 
 	struct nk_style *style = &ctx->style;
 
-	struct nk_style_combo *combo;
 	struct nk_style_tab *tab;
 	struct nk_style_window *win;
 
@@ -2039,6 +2219,11 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Combo", NK_MINIMIZED)) {
+			style_combo(ctx, &style->combo);
+			nk_tree_pop(ctx);
+		}
+
 
 		nk_layout_row_dynamic(ctx, 30, 1);
 		if (nk_button_label(ctx, "Reset all styles to defaults")) {
@@ -2047,24 +2232,6 @@ style_configurator(struct nk_context *ctx)
 
 	}
 
-//
-//		/* combo */
-//		combo = &style->combo;
-//		combo->normal           = nk_style_item_color(table[NK_COLOR_COMBO]);
-//		combo->hover            = nk_style_item_color(table[NK_COLOR_COMBO]);
-//		combo->active           = nk_style_item_color(table[NK_COLOR_COMBO]);
-//		combo->border_color     = table[NK_COLOR_BORDER];
-//		combo->label_normal     = table[NK_COLOR_TEXT];
-//		combo->label_hover      = table[NK_COLOR_TEXT];
-//		combo->label_active     = table[NK_COLOR_TEXT];
-//		combo->sym_normal       = NK_SYMBOL_TRIANGLE_DOWN;
-//		combo->sym_hover        = NK_SYMBOL_TRIANGLE_DOWN;
-//		combo->sym_active       = NK_SYMBOL_TRIANGLE_DOWN;
-//		combo->content_padding  = nk_vec2(4,4);
-//		combo->button_padding   = nk_vec2(0,4);
-//		combo->spacing          = nk_vec2(4,0);
-//		combo->border           = 1;
-//		combo->rounding         = 0;
 //
 //		/* tab */
 //		tab = &style->tab;
