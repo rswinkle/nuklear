@@ -1807,6 +1807,96 @@ style_property(struct nk_context* ctx, struct nk_style_property* out_style)
 	*out_style = property;
 }
 
+static void
+style_chart(struct nk_context* ctx, struct nk_style_chart* out_style)
+{
+	struct nk_style_chart chart = *out_style;
+	//chart = &style->chart;
+	//nk_zero_struct(*chart);
+	//chart->background       = nk_style_item_color(table[NK_COLOR_CHART]);
+	//chart->border_color     = table[NK_COLOR_BORDER];
+	//chart->selected_color   = table[NK_COLOR_CHART_COLOR_HIGHLIGHT];
+	//chart->color            = table[NK_COLOR_CHART_COLOR];
+	//chart->padding          = nk_vec2(4,4);
+	//chart->border           = 0;
+	//chart->rounding         = 0;
+
+	char buffer[64];
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Background:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, chart.background.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(chart.background.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		chart.background.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Border Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, chart.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(chart.border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		chart.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Selected Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, chart.selected_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(chart.selected_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		chart.selected_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Color:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, chart.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(chart.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		chart.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", chart.padding.x, chart.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &chart.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &chart.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_property_float(ctx, "#Border:", -100.0f, &chart.border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Rounding:", -100.0f, &chart.rounding, 100.0f, 1,0.5f);
+
+
+	*out_style = chart;
+}
+
 static int
 style_configurator(struct nk_context *ctx)
 {
@@ -1835,9 +1925,7 @@ style_configurator(struct nk_context *ctx)
 
 	struct nk_style *style = &ctx->style;
 
-	struct nk_style_property *property;
 	struct nk_style_combo *combo;
-	struct nk_style_chart *chart;
 	struct nk_style_tab *tab;
 	struct nk_style_window *win;
 
@@ -1946,24 +2034,19 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Chart", NK_MINIMIZED)) {
+			style_chart(ctx, &style->chart);
+			nk_tree_pop(ctx);
+		}
 
 
+		nk_layout_row_dynamic(ctx, 30, 1);
 		if (nk_button_label(ctx, "Reset all styles to defaults")) {
 			nk_style_default(ctx);
 		}
 
 	}
 
-//		/* chart */
-//		chart = &style->chart;
-//		nk_zero_struct(*chart);
-//		chart->background       = nk_style_item_color(table[NK_COLOR_CHART]);
-//		chart->border_color     = table[NK_COLOR_BORDER];
-//		chart->selected_color   = table[NK_COLOR_CHART_COLOR_HIGHLIGHT];
-//		chart->color            = table[NK_COLOR_CHART_COLOR];
-//		chart->padding          = nk_vec2(4,4);
-//		chart->border           = 0;
-//		chart->rounding         = 0;
 //
 //		/* combo */
 //		combo = &style->combo;
