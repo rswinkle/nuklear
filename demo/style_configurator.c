@@ -2172,7 +2172,7 @@ style_tab(struct nk_context* ctx, struct nk_style_tab* out_style)
 		nk_combo_end(ctx);
 	}
 
-	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	nk_label(ctx, "Spacing:", NK_TEXT_LEFT);
 	sprintf(buffer, "%.2f, %.2f", tab.spacing.x, tab.spacing.y);
 	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
 		nk_layout_row_dynamic(ctx, 25, 1);
@@ -2188,6 +2188,292 @@ style_tab(struct nk_context* ctx, struct nk_style_tab* out_style)
 
 
 	*out_style = tab;
+}
+
+static void
+style_window(struct nk_context* ctx, struct nk_style_window* out_style)
+{
+	struct nk_style_window win = *out_style;
+	//win->background = table[NK_COLOR_WINDOW];
+	//win->fixed_background = nk_style_item_color(table[NK_COLOR_WINDOW]);
+	//win->border_color = table[NK_COLOR_BORDER];
+	//win->popup_border_color = table[NK_COLOR_BORDER];
+	//win->combo_border_color = table[NK_COLOR_BORDER];
+	//win->contextual_border_color = table[NK_COLOR_BORDER];
+	//win->menu_border_color = table[NK_COLOR_BORDER];
+	//win->group_border_color = table[NK_COLOR_BORDER];
+	//win->tooltip_border_color = table[NK_COLOR_BORDER];
+	//win->scaler = nk_style_item_color(table[NK_COLOR_TEXT]);
+	//
+	//win->rounding = 0.0f;
+	//win->spacing = nk_vec2(4,4);
+	//win->scrollbar_size = nk_vec2(10,10);
+	//win->min_size = nk_vec2(64,64);
+	//
+	//win->combo_border = 1.0f;
+	//win->contextual_border = 1.0f;
+	//win->menu_border = 1.0f;
+	//win->group_border = 1.0f;
+	//win->tooltip_border = 1.0f;
+	//win->popup_border = 1.0f;
+	//win->border = 2.0f;
+	//win->min_row_height_padding = 8;
+	//
+	//win->padding = nk_vec2(4,4);
+	//win->group_padding = nk_vec2(4,4);
+	//win->popup_padding = nk_vec2(4,4);
+	//win->combo_padding = nk_vec2(4,4);
+	//win->contextual_padding = nk_vec2(4,4);
+	//win->menu_padding = nk_vec2(4,4);
+	//win->tooltip_padding = nk_vec2(4,4);
+
+	char buffer[64];
+
+	nk_layout_row_dynamic(ctx, 30, 2);
+
+	nk_label(ctx, "Background:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.background, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.background), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.background = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Fixed Background:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.fixed_background.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.fixed_background.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.fixed_background.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Popup Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.popup_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.popup_border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.popup_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Combo Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.combo_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.combo_border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.combo_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Contextual Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.contextual_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.contextual_border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.contextual_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Menu Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.menu_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.menu_border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.menu_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Group Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.group_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.group_border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.group_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Tooltip Border:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.tooltip_border_color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.tooltip_border_color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.tooltip_border_color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Scaler:", NK_TEXT_LEFT);
+	if (nk_combo_begin_color(ctx, win.scaler.data.color, nk_vec2(nk_widget_width(ctx), 400))) {
+		nk_layout_row_dynamic(ctx, 120, 1);
+		struct nk_colorf colorf = nk_color_picker(ctx, nk_color_cf(win.scaler.data.color), NK_RGB);
+		nk_layout_row_dynamic(ctx, 25, 1);
+		colorf.r = nk_propertyf(ctx, "#R:", 0, colorf.r, 1.0f, 0.01f,0.005f);
+		colorf.g = nk_propertyf(ctx, "#G:", 0, colorf.g, 1.0f, 0.01f,0.005f);
+		colorf.b = nk_propertyf(ctx, "#B:", 0, colorf.b, 1.0f, 0.01f,0.005f);
+
+		win.scaler.data.color = nk_rgb_cf(colorf);
+
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Spacing:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.spacing.x, win.spacing.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.spacing.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.spacing.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Scrollbar Size:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.scrollbar_size.x, win.scrollbar_size.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.scrollbar_size.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.scrollbar_size.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Min Size:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.min_size.x, win.min_size.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", 10.0f, &win.min_size.x, 10000.0f, 1,1.0f);
+		nk_property_float(ctx, "#Y:", 10.0f, &win.min_size.y, 10000.0f, 1,1.0f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.padding.x, win.padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Group Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.group_padding.x, win.group_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.group_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.group_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Popup Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.popup_padding.x, win.popup_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.popup_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.popup_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Combo Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.combo_padding.x, win.combo_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.combo_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.combo_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Contextual Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.contextual_padding.x, win.contextual_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.contextual_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.contextual_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Menu Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.menu_padding.x, win.menu_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.menu_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.menu_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_label(ctx, "Tooltip Padding:", NK_TEXT_LEFT);
+	sprintf(buffer, "%.2f, %.2f", win.tooltip_padding.x, win.tooltip_padding.y);
+	if (nk_combo_begin_label(ctx, buffer, nk_vec2(200,200))) {
+		nk_layout_row_dynamic(ctx, 25, 1);
+		nk_property_float(ctx, "#X:", -100.0f, &win.tooltip_padding.x, 100.0f, 1,0.5f);
+		nk_property_float(ctx, "#Y:", -100.0f, &win.tooltip_padding.y, 100.0f, 1,0.5f);
+		nk_combo_end(ctx);
+	}
+
+	nk_property_float(ctx, "#Rounding:", -100.0f, &win.rounding, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Combo Border:", -100.0f, &win.combo_border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Contextual Border:", -100.0f, &win.contextual_border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Menu Border:", -100.0f, &win.menu_border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Group Border:", -100.0f, &win.group_border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Tooltip Border:", -100.0f, &win.tooltip_border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Popup Border:", -100.0f, &win.popup_border, 100.0f, 1,0.5f);
+	nk_property_float(ctx, "#Border:", -100.0f, &win.border, 100.0f, 1,0.5f);
+
+	nk_layout_row_dynamic(ctx, 30, 1);
+	nk_property_float(ctx, "#Min Row Height Padding:", -100.0f, &win.min_row_height_padding, 100.0f, 1,0.5f);
+
+	*out_style = win;
 }
 
 static int
@@ -2341,6 +2627,11 @@ style_configurator(struct nk_context *ctx)
 			nk_tree_pop(ctx);
 		}
 
+		if (nk_tree_push(ctx, NK_TREE_TAB, "Window", NK_MINIMIZED)) {
+			style_window(ctx, &style->window);
+			nk_tree_pop(ctx);
+		}
+
 
 		nk_layout_row_dynamic(ctx, 30, 1);
 		if (nk_button_label(ctx, "Reset all styles to defaults")) {
@@ -2366,40 +2657,6 @@ style_configurator(struct nk_context *ctx)
 //		win->header.padding = nk_vec2(4,4);
 //		win->header.spacing = nk_vec2(0,0);
 //
-//		/* window */
-//		win->background = table[NK_COLOR_WINDOW];
-//		win->fixed_background = nk_style_item_color(table[NK_COLOR_WINDOW]);
-//		win->border_color = table[NK_COLOR_BORDER];
-//		win->popup_border_color = table[NK_COLOR_BORDER];
-//		win->combo_border_color = table[NK_COLOR_BORDER];
-//		win->contextual_border_color = table[NK_COLOR_BORDER];
-//		win->menu_border_color = table[NK_COLOR_BORDER];
-//		win->group_border_color = table[NK_COLOR_BORDER];
-//		win->tooltip_border_color = table[NK_COLOR_BORDER];
-//		win->scaler = nk_style_item_color(table[NK_COLOR_TEXT]);
-//
-//		win->rounding = 0.0f;
-//		win->spacing = nk_vec2(4,4);
-//		win->scrollbar_size = nk_vec2(10,10);
-//		win->min_size = nk_vec2(64,64);
-//
-//		win->combo_border = 1.0f;
-//		win->contextual_border = 1.0f;
-//		win->menu_border = 1.0f;
-//		win->group_border = 1.0f;
-//		win->tooltip_border = 1.0f;
-//		win->popup_border = 1.0f;
-//		win->border = 2.0f;
-//		win->min_row_height_padding = 8;
-//
-//		win->padding = nk_vec2(4,4);
-//		win->group_padding = nk_vec2(4,4);
-//		win->popup_padding = nk_vec2(4,4);
-//		win->combo_padding = nk_vec2(4,4);
-//		win->contextual_padding = nk_vec2(4,4);
-//		win->menu_padding = nk_vec2(4,4);
-//		win->tooltip_padding = nk_vec2(4,4);
-//	}
 	nk_end(ctx);
 	return !nk_window_is_closed(ctx, "Configurator");
 }
