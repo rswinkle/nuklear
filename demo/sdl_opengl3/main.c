@@ -131,6 +131,11 @@ int main(int argc, char *argv[])
     /*set_style(ctx, THEME_DARK);*/
     #endif
 
+    #ifdef INCLUDE_CONFIGURATOR
+    static struct nk_color color_table[NK_COLOR_COUNT];
+    memcpy(color_table, nk_default_color_style, sizeof(color_table));
+    #endif
+
     bg.r = 0.10f, bg.g = 0.18f, bg.b = 0.24f, bg.a = 1.0f;
     while (running)
     {
@@ -183,8 +188,8 @@ int main(int argc, char *argv[])
         #ifdef INCLUDE_OVERVIEW
           overview(ctx);
         #endif
-        #ifdef INCLUDE_OVERVIEW
-          style_configurator(ctx);
+        #ifdef INCLUDE_CONFIGURATOR
+          style_configurator(ctx, color_table);
         #endif
         #ifdef INCLUDE_NODE_EDITOR
           node_editor(ctx);
